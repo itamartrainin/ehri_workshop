@@ -1,1 +1,1 @@
-# ehri_workshop
+# EHRI Workshop
