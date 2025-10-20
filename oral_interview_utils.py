@@ -1,5 +1,6 @@
 import os
 import re
+import json
 import string
 import pandas as pd
 
@@ -40,3 +41,13 @@ def get_testimonies(testimonies_dir):
                 testimonies.append([testimony_id, testimony_content])
 
     return pd.DataFrame(testimonies, columns=['testimony_id', 'content'])
+
+def extract_json(text):
+    # Extract the first JSON-like block using regex
+    match = re.search(r'(\{[\s\S]*\}|\[[\s\S]*\])', text)
+    if match:
+        json_str = match.group()
+        data = json.loads(json_str)
+    else:
+        raise ValueError("No JSON object found in the response.")
+    return data
